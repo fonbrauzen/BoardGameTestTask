@@ -20,12 +20,6 @@ namespace BoardGameTestTaskApp
         private static void FindSpotsInColorGroup(IGrouping<byte, Tile> colorGroup, List<IGrouping<byte, Tile>> colorSpots)
         {
             var oneColorTiles = colorGroup.ToList();
-            //int xMin = oneColorTiles.Min(x => x.XCoordinate);
-            //int xMax = oneColorTiles.Max(x => x.XCoordinate);
-            //int yMin = oneColorTiles.Min(x => x.YCoordinate);
-            //int yMax = oneColorTiles.Max(x => x.YCoordinate);
-
-            // Tile first = oneColorTiles.First();// x => x.XCoordinate == xMin);
             foreach (Tile item in colorGroup)
             {
                 if (colorSpots.FindIndex(x => x.Contains(item)) < 0)

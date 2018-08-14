@@ -40,7 +40,7 @@ namespace BoardGameTestTaskTest
             List<Tile> neighbours = new List<Tile>() { a, b };
             var grouped = neighbours.GroupBy(x => x.Color).ToList();
             var result = ColorSpots.Calculate(grouped);
-            Assert.True(result[0].Count() == 1);
+            Assert.True(result.Count() == 1);
         }
     }
 }
