@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGameTestTaskApp", "BoardGameTestTaskApp\BoardGameTestTaskApp.csproj", "{02932472-D98F-436F-AB06-B47716AE950A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGameTestTaskTest", "BoardGameTestTaskTest\BoardGameTestTaskTest.csproj", "{A45D420D-63DC-4D26-AB8F-186F5C18AB80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02932472-D98F-436F-AB06-B47716AE950A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02932472-D98F-436F-AB06-B47716AE950A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02932472-D98F-436F-AB06-B47716AE950A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02932472-D98F-436F-AB06-B47716AE950A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45D420D-63DC-4D26-AB8F-186F5C18AB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45D420D-63DC-4D26-AB8F-186F5C18AB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45D420D-63DC-4D26-AB8F-186F5C18AB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45D420D-63DC-4D26-AB8F-186F5C18AB80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BB74FA2-5DAD-4367-BF49-DC1120B787BB}
+	EndGlobalSection
+EndGlobal
