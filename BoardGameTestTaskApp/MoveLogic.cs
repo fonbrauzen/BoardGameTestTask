@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BoardGameTestTaskApp.Utilities;
+using System.Collections.Generic;
 using System.Linq;
 using static BoardGameTestTaskApp.Models;
 
@@ -6,33 +7,45 @@ namespace BoardGameTestTaskApp
 {
     class MoveLogic
     {
-        public static void MakeBestMove(List<IGrouping<byte, Tile>> colorSpots)
+        public static void MakeBestMove(List<ColorSpot> colorSpots)
         {
-            int maxSpotIndex = ColorSpots.CalculateBiggest(colorSpots);
+            int maxSpotIndex = CalculateBiggest(colorSpots);
 
         }
 
-        static void CalculateMoveCell(List<Tile> board, List<IGrouping<byte, Tile>> colorSpots, int maxSpotIndex)
+        public static int CalculateBiggest(List<ColorSpot> colorSpots)
         {
-            IGrouping<byte, Tile> maxSpot = colorSpots[maxSpotIndex];
-            var maxSpotTiles = maxSpot.ToList();
-            int maxSpotLength = maxSpotTiles.Count;
-
-            
-
-
+            var maxSpotIndex = LINQExstensions.MaxIndex(colorSpots, x => BiggestSpotConditions(x));// colorSpots.Max(x => BiggestSpotConditions(x));
+            // var maxSpotIndex = colorSpots.IndexOf(colorSpots.First(x => BiggestSpotConditions(x) == maxSpot));
+            return maxSpotIndex;
         }
 
-        static List<IGrouping<byte, Tile>> GetNeighbourSpots(List<IGrouping<byte, Tile>> colorSpots, List<Tile> maxSpotTiles)
+        private static int BiggestSpotConditions(ColorSpot x)
         {
-            List<IGrouping<byte, Tile>> neighbourSpots = new List<IGrouping<byte, Tile>>();
-            foreach (Tile tile in maxSpotTiles)
-            {
-                neighbourSpots.AddRange(ColorSpots.GetNeighbourSpots(tile, colorSpots));
-            }
-            neighbourSpots = neighbourSpots.Distinct().ToList();
-            return neighbourSpots;
+            return x.SpotTiles.Count + x.ColorsWeights.Max(y => y.TileNumber);
         }
-        
+
+        //static void CalculateMoveCell(List<Tile> board, List<IGrouping<byte, Tile>> colorSpots, int maxSpotIndex)
+        //{
+        //    IGrouping<byte, Tile> maxSpot = colorSpots[maxSpotIndex];
+        //    var maxSpotTiles = maxSpot.ToList();
+        //    int maxSpotLength = maxSpotTiles.Count;
+
+
+
+
+        //}
+
+        //static List<IGrouping<byte, Tile>> GetNeighbourSpots(List<IGrouping<byte, Tile>> colorSpots, List<Tile> maxSpotTiles)
+        //{
+        //    List<IGrouping<byte, Tile>> neighbourSpots = new List<IGrouping<byte, Tile>>();
+        //    foreach (Tile tile in maxSpotTiles)
+        //    {
+        //        neighbourSpots.AddRange(ColorSpots.GetNeighbourSpots(tile, colorSpots));
+        //    }
+        //    neighbourSpots = neighbourSpots.Distinct().ToList();
+        //    return neighbourSpots;
+        //}
+
     }
 }

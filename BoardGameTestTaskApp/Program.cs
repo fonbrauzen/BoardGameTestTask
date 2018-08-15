@@ -15,7 +15,7 @@ namespace BoardGameTestTaskApp
             List<IGrouping<byte, Tile>> colorGroups = Board.GroupByColor(board);
             List<IGrouping<byte, Tile>> colorSpotsGroups = ColorSpots.Calculate(colorGroups);
             List<ColorSpot> colorSpots = ColorSpots.Spotify(colorSpotsGroups);
-            // MoveLogic.MakeBestMove(colorSpots);
+            MoveLogic.MakeBestMove(colorSpots);
         }
     }
 }

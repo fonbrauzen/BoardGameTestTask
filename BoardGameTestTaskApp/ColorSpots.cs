@@ -58,13 +58,6 @@ namespace BoardGameTestTaskApp
             (x.XCoordinate == tile.XCoordinate && (x.YCoordinate == tile.YCoordinate + 1 || x.YCoordinate == tile.YCoordinate - 1))).ToList();
         }
 
-        public static int CalculateBiggest(List<IGrouping<byte, Tile>> colorSpots)
-        {
-            var maxSpot = colorSpots.Max(x => x.Count());
-            var maxSpotIndex = colorSpots.IndexOf(colorSpots.First(x => x.Count() == maxSpot));
-            return maxSpotIndex;
-        }
-
         public static List<ColorSpot> Spotify(List<IGrouping<byte, Tile>> colorSpotsGroups)
         {
             List<ColorSpot> spots = new List<ColorSpot>();
