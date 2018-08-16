@@ -27,7 +27,7 @@ namespace BoardGameTestTaskTest
             Tile a = new Tile(XCoordinate, YCoordinateA, color);
             Tile b = new Tile(XCoordinate, YCoordinateB, color);
             List<Tile> neighbours = new List<Tile>() { a, b };
-            var result =  ColorSpots.GetNeighbourTiles(neighbours, a);
+            var result =  ColorSpots.GetNeighborTiles(neighbours, a);
             Assert.True(result.Count == 1);
         }
 

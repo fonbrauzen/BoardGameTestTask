@@ -38,7 +38,7 @@ namespace BoardGameTestTaskApp
                 if (colorSpots.FindIndex(x => x.Contains(item)) < 0)
                 {
                     List<Tile> colorSpot = new List<Tile>() { item };
-                    List<Tile> neibours = GetNeighbourTiles(oneColorTiles, item);
+                    List<Tile> neibours = GetNeighborTiles(oneColorTiles, item);
                     if (neibours.Count > 0)
                     {
                         Queue<Tile> neighboursIteration = new Queue<Tile>(neibours);
@@ -49,7 +49,7 @@ namespace BoardGameTestTaskApp
                             {
                                 colorSpot.Add(neibour);
                             }
-                            List<Tile> neighboursNeighbours = GetNeighbourTiles(oneColorTiles, neibour);
+                            List<Tile> neighboursNeighbours = GetNeighborTiles(oneColorTiles, neibour);
                             foreach (Tile n in neighboursNeighbours)
                             {
                                 if (!colorSpot.Contains(n))
@@ -65,7 +65,7 @@ namespace BoardGameTestTaskApp
             }
         }
 
-        public static List<Tile> GetNeighbourTiles(List<Tile> Tiles, Tile tile)
+        public static List<Tile> GetNeighborTiles(List<Tile> Tiles, Tile tile)
         {
             return Tiles.Where(x => (x.YCoordinate == tile.YCoordinate && (x.XCoordinate == tile.XCoordinate + 1 || x.XCoordinate == tile.XCoordinate - 1)) || 
             (x.XCoordinate == tile.XCoordinate && (x.YCoordinate == tile.YCoordinate + 1 || x.YCoordinate == tile.YCoordinate - 1))).ToList();
@@ -80,7 +80,7 @@ namespace BoardGameTestTaskApp
                 ColorSpot spot = new ColorSpot
                 {
                     Color = group.Key,
-                    IsControlled = false,
+                    Id = i,
                     SpotTiles = group.ToList()
                 };
                 CalculateColorWeights(colorSpotsGroups, i, spot);
@@ -92,24 +92,24 @@ namespace BoardGameTestTaskApp
 
         private static void CalculateColorWeights(List<IGrouping<byte, Tile>> colorSpotsGroups, int spotIndex, ColorSpot spot)
         {
-            List<IGrouping<byte, Tile>> neighbours = new List<IGrouping<byte, Tile>>();
+            List<IGrouping<byte, Tile>> neighbors = new List<IGrouping<byte, Tile>>();
             var otherSpots = colorSpotsGroups.Where((v, j) => j != spotIndex).ToList();
             foreach (Tile tile in spot.SpotTiles)
             {
-                List<IGrouping<byte, Tile>> tilNeighbours = GetNeighbourSpots(tile, otherSpots);
-                neighbours.AddRange(tilNeighbours);
+                List<IGrouping<byte, Tile>> tilNeighbours = GetNeighborSpots(tile, otherSpots);
+                neighbors.AddRange(tilNeighbours);
             }
-            neighbours = neighbours.Distinct().ToList();
-            var neighboursGroups = neighbours.GroupBy(x => x.Key).ToList();
-            foreach (var color in neighboursGroups)
+            neighbors = neighbors.Distinct().ToList();
+            var neighborsGroups = neighbors.GroupBy(x => x.Key).ToList();
+            foreach (var color in neighborsGroups)
             {
                 GetColorWeight(colorSpotsGroups, spot, color);
             }
         }
 
-        public static List<IGrouping<byte, Tile>> GetNeighbourSpots(Tile tile, List<IGrouping<byte, Tile>> spots)
+        public static List<IGrouping<byte, Tile>> GetNeighborSpots(Tile tile, List<IGrouping<byte, Tile>> spots)
         {
-            return spots.Where(x => GetNeighbourTiles(x.ToList(), tile).Count() > 0).ToList();
+            return spots.Where(x => GetNeighborTiles(x.ToList(), tile).Count() > 0).ToList();
         }
 
         private static void GetColorWeight(List<IGrouping<byte, Tile>> colorSpotsGroups, ColorSpot spot, IGrouping<byte, IGrouping<byte, Tile>> color)
@@ -121,7 +121,7 @@ namespace BoardGameTestTaskApp
             var colorNeighbours = color.ToList();
             foreach (IGrouping<byte, Tile> neighbour in colorNeighbours)
             {
-                colorWeight.NeighboursSpotsIndexes.Add(colorSpotsGroups.IndexOf(neighbour));
+                colorWeight.NeighborsSpotsIds.Add(colorSpotsGroups.IndexOf(neighbour));
                 colorWeight.TileNumber += neighbour.Count();
             }
             spot.ColorsWeights.Add(colorWeight);

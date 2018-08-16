@@ -27,7 +27,7 @@ namespace BoardGameTestTaskApp
         {
             public byte Color { get; set; }
             public List<Tile> SpotTiles { get; set; }
-            public bool IsControlled { get; set; }
+            internal int Id { get; set; }
             public List<ColorWeight> ColorsWeights { get; set; } = new List<ColorWeight>();
         }
 
@@ -35,7 +35,7 @@ namespace BoardGameTestTaskApp
         {
             public byte Color { get; set; }
             public int TileNumber { get; set; }
-            public List<int> NeighboursSpotsIndexes { get; set; } = new List<int>();
+            public List<int> NeighborsSpotsIds { get; set; } = new List<int>();
         }
 
         public class Move

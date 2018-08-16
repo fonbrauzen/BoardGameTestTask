@@ -7,7 +7,8 @@ namespace BoardGameTestTaskApp
     {
         static byte ColorsNumber = 3;
         static byte BoardSize = 6;
-        internal static List<Move> Moves { get; set; }
+        internal static int StartSpotId;
+        internal static List<Move> Moves { get; set; } = new List<Move>();
 
         static void Main()
         {
@@ -18,6 +19,7 @@ namespace BoardGameTestTaskApp
             {
                 MoveLogic.MakeBestMove(colorSpots);
             }
+            //TODO add end action for prevent console close
         }
     }
 }

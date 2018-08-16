@@ -1,10 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using static BoardGameTestTaskApp.Models;
 
 namespace BoardGameTestTaskApp
 {
     public static class Logger
     {
+        public static void BoardifyAndLog(List<ColorSpot> colorSpots)
+        {
+            List<Tile> newBoard = new List<Tile>();
+            colorSpots.ForEach(x => newBoard.AddRange(x.SpotTiles));
+            newBoard = newBoard.Distinct().ToList();
+            Log(newBoard);
+        }
+
         public static Move Log(List<Tile> board, byte? newColor = null)
         {
             Move result = new Move(board, newColor);
