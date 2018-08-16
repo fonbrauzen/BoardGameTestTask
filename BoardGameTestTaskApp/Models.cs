@@ -28,35 +28,26 @@ namespace BoardGameTestTaskApp
             public byte Color { get; set; }
             public List<Tile> SpotTiles { get; set; }
             public bool IsControlled { get; set; }
-            public List<ColorWeight> ColorsWeights { get; set; }
+            public List<ColorWeight> ColorsWeights { get; set; } = new List<ColorWeight>();
         }
 
         public class ColorWeight
         {
             public byte Color { get; set; }
             public int TileNumber { get; set; }
-            public List<int> NeighboursSpotsIndexes { get; set; }
+            public List<int> NeighboursSpotsIndexes { get; set; } = new List<int>();
         }
 
-        //public class TileComparer : IEqualityComparer<Tile>
-        //{
+        public class Move
+        {
+            public byte? NewColor { get; set; }
+            public List<Tile> Tiles { get; set; }
 
-        //    public bool Equals(Tile x, Tile y)
-        //    {
-        //        //Check whether the objects are the same object. 
-        //        if (ReferenceEquals(x, y)) return true;
-
-        //        //Check whether the products' properties are equal. 
-        //        return x != null && y != null && x.XCoordinate.Equals(y.XCoordinate) && x.YCoordinate.Equals(y.YCoordinate) && x.Color.Equals(y.Color);
-        //    }
-
-        //    public int GetHashCode(Tile obj)
-        //    {
-        //        int hashCode = obj.XCoordinate.GetHashCode() + obj.YCoordinate.GetHashCode() + obj.Color.GetHashCode();
-
-        //        //Calculate the hash code for the product. 
-        //        return hashCode;
-        //    }
-        //}
+            public Move(List<Tile> tiles, byte? newColor = null)
+            {
+                NewColor = newColor;
+                Tiles = tiles;
+            }
+        }
     }
 }

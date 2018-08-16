@@ -6,6 +6,19 @@ namespace BoardGameTestTaskApp
 {
     public class ColorSpots
     {
+        public static List<ColorSpot> Spotify(List<Tile> board)
+        {
+            List<IGrouping<byte, Tile>> colorGroups = GroupByColor(board);
+            List<IGrouping<byte, Tile>> colorSpotsGroups = Calculate(colorGroups);
+            List<ColorSpot> colorSpots = SpotGroupsToSpots(colorSpotsGroups);
+            return colorSpots;
+        }
+
+        private static List<IGrouping<byte, Tile>> GroupByColor(List<Tile> board)
+        {
+            return board.GroupBy(x => x.Color).ToList();
+        }
+
         public static List<IGrouping<byte, Tile>> Calculate(List<IGrouping<byte, Tile>> colorGroups)
         {
             List<IGrouping<byte, Tile>> colorSpots = new List<IGrouping<byte, Tile>>();
@@ -58,7 +71,7 @@ namespace BoardGameTestTaskApp
             (x.XCoordinate == tile.XCoordinate && (x.YCoordinate == tile.YCoordinate + 1 || x.YCoordinate == tile.YCoordinate - 1))).ToList();
         }
 
-        public static List<ColorSpot> Spotify(List<IGrouping<byte, Tile>> colorSpotsGroups)
+        private static List<ColorSpot> SpotGroupsToSpots(List<IGrouping<byte, Tile>> colorSpotsGroups)
         {
             List<ColorSpot> spots = new List<ColorSpot>();
             for (int i = 0; i < colorSpotsGroups.Count; i++)
@@ -68,8 +81,7 @@ namespace BoardGameTestTaskApp
                 {
                     Color = group.Key,
                     IsControlled = false,
-                    SpotTiles = group.ToList(),
-                    ColorsWeights = new List<ColorWeight>()
+                    SpotTiles = group.ToList()
                 };
                 CalculateColorWeights(colorSpotsGroups, i, spot);
                 spots.Add(spot);
@@ -104,8 +116,7 @@ namespace BoardGameTestTaskApp
         {
             ColorWeight colorWeight = new ColorWeight
             {
-                Color = color.Key,
-                NeighboursSpotsIndexes = new List<int>()
+                Color = color.Key
             };
             var colorNeighbours = color.ToList();
             foreach (IGrouping<byte, Tile> neighbour in colorNeighbours)

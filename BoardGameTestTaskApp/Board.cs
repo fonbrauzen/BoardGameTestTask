@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using static BoardGameTestTaskApp.Models;
 
 namespace BoardGameTestTaskApp
@@ -20,11 +19,6 @@ namespace BoardGameTestTaskApp
                 }
             }
             return board;
-        }
-
-        public static List<IGrouping<byte, Tile>> GroupByColor(List<Tile> board)
-        {
-            return board.GroupBy(x => x.Color).ToList();
         }
     }
 }
