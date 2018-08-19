@@ -12,9 +12,9 @@ namespace BoardGameTestTaskApp
             if (Program.Moves.Count == 1)
             {
                 int maxSpotId = CalculateBestSpot(colorSpots);
-                Program.StartSpotId = maxSpotId;
+                Program.StartSpot = colorSpots.First(x => x.Id == maxSpotId);
             }
-            byte?newColor = ChangeColor(Program.StartSpotId, colorSpots);
+            byte?newColor = ChangeColor(colorSpots);
             Logger.BoardifyAndLog(colorSpots, newColor);
         }
 
@@ -29,10 +29,10 @@ namespace BoardGameTestTaskApp
             return x.SpotTiles.Count + x.ColorsWeights.Max(y => y.TileNumber);
         }
 
-        public static byte? ChangeColor(int moveSpotId, List<ColorSpot> colorSpots)
+        public static byte? ChangeColor(List<ColorSpot> colorSpots)
         {
             byte? newColor;
-            ColorSpot moveSpot = colorSpots.First(x => x.Id == moveSpotId);
+            ColorSpot moveSpot = Program.StartSpot;
             ColorWeight maxColorWeight = GetMaxColorWeight(moveSpot);
             newColor = moveSpot.Color = maxColorWeight.Color;
             MergeWithMaxColorWeightNeigbors(colorSpots, moveSpot, maxColorWeight);
