@@ -6,12 +6,12 @@ namespace BoardGameTestTaskApp
 {
     public static class Logger
     {
-        public static void BoardifyAndLog(List<ColorSpot> colorSpots)
+        public static void BoardifyAndLog(List<ColorSpot> colorSpots, byte? newColor)
         {
             List<Tile> newBoard = new List<Tile>();
             colorSpots.ForEach(x => newBoard.AddRange(x.SpotTiles));
-            newBoard = newBoard.Distinct().ToList();
-            Log(newBoard);
+            newBoard = newBoard.Distinct().OrderBy(x => x.XCoordinate).ThenBy(x => x.YCoordinate).ToList();
+            Log(newBoard, newColor);
         }
 
         public static Move Log(List<Tile> board, byte? newColor = null)

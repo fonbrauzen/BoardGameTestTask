@@ -42,5 +42,7 @@ namespace BoardGameTestTaskTest
             var result = ColorSpots.Calculate(grouped);
             Assert.True(result.Count() == 1);
         }
+
+        // add more unit tests
     }
 }
