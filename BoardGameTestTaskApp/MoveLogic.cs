@@ -34,12 +34,7 @@ namespace BoardGameTestTaskApp
             byte? newColor;
             ColorSpot moveSpot = colorSpots.First(x => x.Id == moveSpotId);
             ColorWeight maxColorWeight = GetMaxColorWeight(moveSpot);
-            moveSpot.Color = maxColorWeight.Color;
             newColor = moveSpot.Color = maxColorWeight.Color;
-            foreach (Tile tile in moveSpot.SpotTiles)
-            {
-                tile.Color = maxColorWeight.Color;
-            }
             MergeWithMaxColorWeightNeigbors(colorSpots, moveSpot, maxColorWeight);
             return newColor;
         }
