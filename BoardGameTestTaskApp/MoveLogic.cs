@@ -36,6 +36,7 @@ namespace BoardGameTestTaskApp
             ColorWeight maxColorWeight = GetMaxColorWeight(moveSpot);
             newColor = moveSpot.Color = maxColorWeight.Color;
             MergeWithMaxColorWeightNeigbors(colorSpots, moveSpot, maxColorWeight);
+            moveSpot.SpotTiles.ForEach(x => x.Color = moveSpot.Color);
             return newColor;
         }
 
@@ -56,7 +57,6 @@ namespace BoardGameTestTaskApp
                 moveSpot.SpotTiles.AddRange(neighbor.SpotTiles);
                 moveSpot.ColorsWeights.First(x => x.Color == maxColorWeight.Color).NeighborsSpotsIds.Remove(neighbor.Id);
             }
-            moveSpot.SpotTiles.ForEach(x => x.Color = moveSpot.Color);
             CleanupEmptyColorWeights(moveSpot);
             TilesNumbersRecalculate(colorSpots, moveSpot);
 
