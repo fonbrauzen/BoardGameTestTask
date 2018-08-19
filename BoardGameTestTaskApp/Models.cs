@@ -12,14 +12,12 @@ namespace BoardGameTestTaskApp
             public byte XCoordinate { get; set; }
             public byte YCoordinate { get; set; }
             public byte Color { get; set; }
-            internal bool Controlled { get; set; }
 
-            public Tile(byte xCoordinate = 0, byte yCoordinate = 0, byte color = 0, bool controlled = false)
+            public Tile(byte xCoordinate = 0, byte yCoordinate = 0, byte color = 0)
             {
                 XCoordinate = xCoordinate;
                 YCoordinate = yCoordinate;
                 Color = color;
-                Controlled = controlled;
             }
         }
 
