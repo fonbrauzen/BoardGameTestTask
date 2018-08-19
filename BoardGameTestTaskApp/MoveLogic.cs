@@ -51,12 +51,11 @@ namespace BoardGameTestTaskApp
         private static void MergeWithMaxColorWeightNeigbors(List<ColorSpot> colorSpots, ColorSpot moveSpot, ColorWeight maxColorWeight)
         {
             List<ColorSpot> maxColorNeighbors = new List<ColorSpot>();
-
+            Program.MergedIds.AddRange(maxColorWeight.NeighborsSpotsIds);
             foreach (int id in maxColorWeight.NeighborsSpotsIds)
             {
                 var colorSpot = colorSpots.First(x => x.Id == id);
                 maxColorNeighbors.Add(colorSpot);
-                Program.MergedIds.Add(id);
                 colorSpots.Remove(colorSpot);
             }
 
@@ -67,8 +66,7 @@ namespace BoardGameTestTaskApp
                 moveSpot.ColorsWeights.First(x => x.Color == maxColorWeight.Color).NeighborsSpotsIds.Remove(neighbor.Id);
             }
             moveSpot.SpotTiles.ForEach(x => x.Color = moveSpot.Color);
-            CleanupColorWeights(moveSpot);
-            UpdateColorWeightsDataForAllSpots(colorSpots);
+            CleanupEmptyColorWeights(moveSpot);
             TilesNumbersRecalculate(colorSpots, moveSpot);
 
         }
@@ -77,31 +75,13 @@ namespace BoardGameTestTaskApp
         {
             foreach (ColorWeight weight in moveSpot.ColorsWeights)
             {
+                weight.NeighborsSpotsIds = weight.NeighborsSpotsIds.Except(Program.MergedIds).ToList();
                 int tilesNumber = 0;
                 foreach (int id in weight.NeighborsSpotsIds)
                 {
                     tilesNumber += colorSpots.First(x => x.Id == id).SpotTiles.Count;
                 }
                 weight.TileNumber = tilesNumber;
-            }
-        }
-
-        private static void UpdateColorWeightsDataForAllSpots(List<ColorSpot> colorSpots)
-        {
-            Program.MergedIds = Program.MergedIds.Distinct().ToList();
-            foreach (int mergedId in Program.MergedIds)
-            {
-                List<ColorSpot> spotsForUpdate = colorSpots.Where(x => x.ColorsWeights.Any(y => y.NeighborsSpotsIds.Contains(mergedId) == true)).ToList();
-                foreach (ColorSpot spot in spotsForUpdate)
-                {
-                    foreach (ColorWeight colorWeight in spot.ColorsWeights)
-                    {
-                        if (colorWeight.NeighborsSpotsIds.Contains(mergedId))
-                        {
-                            colorWeight.NeighborsSpotsIds.Remove(mergedId);
-                        }
-                    }
-                }
             }
         }
 
@@ -136,7 +116,7 @@ namespace BoardGameTestTaskApp
             }
         }
 
-        private static void CleanupColorWeights(ColorSpot moveSpot)
+        private static void CleanupEmptyColorWeights(ColorSpot moveSpot)
         {
             List<ColorWeight> emptyColorWeights = moveSpot.ColorsWeights.Where(x => x.NeighborsSpotsIds.Count == 0).ToList();
             foreach (var emptyColorWeight in emptyColorWeights)

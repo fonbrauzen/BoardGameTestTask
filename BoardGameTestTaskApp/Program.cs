@@ -8,7 +8,6 @@ namespace BoardGameTestTaskApp
         static byte ColorsNumber = 3;
         static byte BoardSize = 6;
         internal static int StartSpotId;
-        internal static int StartSpotInitialTilesNumber;
         internal static List<int> MergedIds { get; set; } = new List<int>();
         internal static List<Move> Moves { get; set; } = new List<Move>();
 
