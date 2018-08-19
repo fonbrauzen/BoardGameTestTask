@@ -33,10 +33,6 @@ namespace BoardGameTestTaskApp
         {
             byte? newColor;
             ColorSpot moveSpot = colorSpots.First(x => x.Id == moveSpotId);
-            if (Program.Moves.Count == 1)
-            {
-                Program.StartSpotInitialTilesNumber = moveSpot.SpotTiles.Count;
-            }
             ColorWeight maxColorWeight = GetMaxColorWeight(moveSpot);
             moveSpot.Color = maxColorWeight.Color;
             newColor = moveSpot.Color = maxColorWeight.Color;
