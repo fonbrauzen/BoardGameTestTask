@@ -33,7 +33,7 @@ namespace BoardGameTestTaskTest
 
         [Theory]
         [InlineData(2, 5, 0, 1)]
-        public void SpotNCalculationTest(byte color, byte XCoordinate, byte YCoordinateA, byte YCoordinateB)
+        public void SpotCalculationTest(byte color, byte XCoordinate, byte YCoordinateA, byte YCoordinateB)
         {
             Tile a = new Tile(XCoordinate, YCoordinateA, color);
             Tile b = new Tile(XCoordinate, YCoordinateB, color);
